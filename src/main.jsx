@@ -9,7 +9,7 @@ import StudentDashboard from './components/StudentDashboard';
 
 const App = () => {
   // Enhanced Dark Mode State (Remembers user preference)
-  const[isDarkMode, setIsDarkMode] = useState(() => {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
 
@@ -40,3 +40,24 @@ const App = () => {
               className="text-2xl hover:scale-110 transition-transform bg-gray-100 dark:bg-darkBase p-2 rounded-full border dark:border-darkBorder"
               title="Toggle Dark Mode"
             >
+              {isDarkMode ? '☀️' : '🌙'}
+            </button>
+            <Link to="/" className="text-xs font-bold tracking-widest uppercase text-gray-500 hover:text-emeraldGreen dark:hover:text-white transition-colors hidden md:block">Sign Out</Link>
+          </div>
+        </nav>
+
+        {/* Dynamic Page Content */}
+        <main className="flex-grow p-4 md:p-8">
+          <Routes>
+            <Route path="/" element={<LoginScreen />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/teacher" element={<TeacherDashboard />} />
+            <Route path="/student" element={<StudentDashboard />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
