@@ -12,13 +12,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col font-sans bg-gray-50">
-        {/* Universal Navigation Bar */}
-        <nav className="bg-emeraldGreen text-white p-4 shadow-md flex justify-between items-center sticky top-0 z-40">
-          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition">
-            <div className="w-10 h-10 bg-emeraldYellow rounded-full flex items-center justify-center font-bold text-emeraldGreen shadow-sm">EF</div>
-            <h1 className="text-xl font-bold tracking-wide">Emerald Field</h1>
+        {/* Navigation Bar */}
+        <nav className="bg-darkBase border-b border-darkBorder text-white p-6 flex justify-between items-center sticky top-0 z-40">
+          <Link to="/" className="flex items-center space-x-4 group">
+            <div className="w-10 h-10 border border-darkBorder rounded-full flex items-center justify-center font-display text-emeraldYellow group-hover:border-emeraldYellow transition-colors">EF</div>
+            <h1 className="text-2xl font-display uppercase tracking-widest">Emerald Field</h1>
           </Link>
-          <Link to="/" className="bg-white text-emeraldGreen px-3 py-1 rounded text-sm font-bold shadow hover:bg-gray-100 transition">Log Out</Link>
+          <Link to="/" className="text-xs tracking-widest uppercase text-gray-500 hover:text-white transition-colors">End Session</Link>
         </nav>
 
         {/* Dynamic Page Content Router */}
