@@ -3,62 +3,45 @@ import { useLocation, Navigate } from 'react-router-dom';
 
 const TeacherDashboard = () => {
   const location = useLocation();
-  const user = location.state?.user; // Gets the teacher logged in from LoginScreen
+  const user = location.state?.user;
 
-  // If someone tries to visit /teacher without logging in, send them back
-  if (!user) {
-    return <Navigate to="/" />;
-  }
+  if (!user) return <Navigate to="/" />;
 
-  // Determine the default tab based on their highest role
   const defaultTab = user.roles.isSubjectTeacher ? 'subject' : (user.roles.isClassTeacher ? 'class' : 'hod');
   const [activeTab, setActiveTab] = useState(defaultTab);
 
+  // Fake Data for the tables
+  const classList =[
+    { id: 1, name: "Alice Asuquo", cat1: 18, cat2: 15, misc: 8, exam: 45 },
+    { id: 2, name: "David Mark", cat1: 12, cat2: 14, misc: 7, exam: 30 },
+    { id: 3, name: "Mary Slessor", cat1: 20, cat2: 19, misc: 10, exam: 48 },
+    { id: 4, name: "John Doe", cat1: 15, cat2: 16, misc: 8, exam: 40 },
+    { id: 5, name: "Sarah Connor", cat1: 19, cat2: 18, misc: 9, exam: 47 }
+  ];
+
   return (
     <div className="max-w-6xl mx-auto">
-      {/* Teacher Profile Header */}
-      <div className="bg-emeraldGreen text-white p-6 rounded-lg shadow-md mb-6 flex justify-between items-center">
+      {/* HEADER */}
+      <div className="bg-emeraldGreen dark:bg-[#0a0a0a] border dark:border-darkBorder text-white p-6 rounded-lg shadow-md mb-6 flex justify-between items-center transition-colors">
         <div>
-          <h2 className="text-3xl font-bold">{user.name}</h2>
+          <h2 className="text-3xl font-display uppercase tracking-widest">{user.name}</h2>
           <p className="text-emeraldYellow font-bold text-sm mt-1">{user.email}</p>
         </div>
-        <div className="text-right">
-          <p className="text-sm font-bold opacity-90">Active Roles:</p>
-          <div className="flex gap-2 mt-1 justify-end">
-            {user.roles.isSubjectTeacher && <span className="bg-white text-emeraldGreen text-xs px-2 py-1 rounded font-bold">Subject Teacher</span>}
-            {user.roles.isClassTeacher && <span className="bg-emeraldYellow text-emeraldGreen text-xs px-2 py-1 rounded font-bold">Class Teacher</span>}
-            {user.roles.isHOD && <span className="bg-gray-800 text-emeraldYellow text-xs px-2 py-1 rounded font-bold">HOD</span>}
-          </div>
-        </div>
       </div>
 
-      {/* Dynamic Tab Navigation (Only shows tabs the teacher has access to) */}
-      <div className="flex border-b border-gray-300 mb-6 space-x-4">
-        {user.roles.isSubjectTeacher && (
-          <button onClick={() => setActiveTab('subject')} className={`pb-2 px-4 font-bold ${activeTab === 'subject' ? 'border-b-4 border-emeraldGreen text-emeraldGreen' : 'text-gray-500 hover:text-gray-800'}`}>
-            Subject Teacher Workspace
-          </button>
-        )}
-        {user.roles.isClassTeacher && (
-          <button onClick={() => setActiveTab('class')} className={`pb-2 px-4 font-bold ${activeTab === 'class' ? 'border-b-4 border-emeraldGreen text-emeraldGreen' : 'text-gray-500 hover:text-gray-800'}`}>
-            Class Teacher Workspace
-          </button>
-        )}
-        {user.roles.isHOD && (
-          <button onClick={() => setActiveTab('hod')} className={`pb-2 px-4 font-bold ${activeTab === 'hod' ? 'border-b-4 border-emeraldGreen text-emeraldGreen' : 'text-gray-500 hover:text-gray-800'}`}>
-            HOD Workspace
-          </button>
-        )}
+      {/* TABS */}
+      <div className="flex border-b border-gray-300 dark:border-darkBorder mb-6 space-x-4">
+        {user.roles.isSubjectTeacher && <button onClick={() => setActiveTab('subject')} className={`pb-2 px-4 font-bold uppercase tracking-wider text-sm ${activeTab === 'subject' ? 'border-b-4 border-emeraldGreen text-emeraldGreen dark:text-emeraldYellow dark:border-emeraldYellow' : 'text-gray-500 dark:text-gray-400'}`}>Subject View</button>}
+        {user.roles.isClassTeacher && <button onClick={() => setActiveTab('class')} className={`pb-2 px-4 font-bold uppercase tracking-wider text-sm ${activeTab === 'class' ? 'border-b-4 border-emeraldGreen text-emeraldGreen dark:text-emeraldYellow dark:border-emeraldYellow' : 'text-gray-500 dark:text-gray-400'}`}>Class Manager</button>}
+        {user.roles.isHOD && <button onClick={() => setActiveTab('hod')} className={`pb-2 px-4 font-bold uppercase tracking-wider text-sm ${activeTab === 'hod' ? 'border-b-4 border-emeraldGreen text-emeraldGreen dark:text-emeraldYellow dark:border-emeraldYellow' : 'text-gray-500 dark:text-gray-400'}`}>HOD Overview</button>}
       </div>
 
-      {/* --- TAB CONTENT --- */}
-
-      {/* 1. SUBJECT TEACHER VIEW */}
-      {activeTab === 'subject' && user.roles.isSubjectTeacher && (
-        <div className="bg-white p-6 rounded shadow border-t-4 border-emeraldGreen">
+      {/* CONTENT */}
+      {activeTab === 'subject' && (
+        <div className="bg-white dark:bg-darkSurface p-6 rounded shadow-sm border dark:border-darkBorder border-t-4 border-t-emeraldGreen transition-colors">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="font-bold text-xl text-gray-800">Upload Results & Assignments</h3>
-            <select className="border p-2 rounded text-emeraldGreen font-bold border-emeraldGreen outline-none">
+            <h3 className="font-bold text-xl text-gray-900 dark:text-white">Upload Results</h3>
+            <select className="border dark:border-darkBorder bg-transparent dark:text-white p-2 rounded text-emeraldGreen font-bold outline-none">
               {user.assignments.subjects.map(sub => <option key={sub}>{sub}</option>)}
             </select>
           </div>
@@ -66,68 +49,63 @@ const TeacherDashboard = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-100 border-b-2 border-emeraldGreen text-sm">
+                <tr className="bg-gray-100 dark:bg-[#111] border-b-2 border-emeraldGreen text-xs uppercase tracking-wider text-gray-700 dark:text-gray-300">
                   <th className="p-3">Student Name</th>
                   <th className="p-3">CAT 1 (20)</th>
                   <th className="p-3">CAT 2 (20)</th>
                   <th className="p-3">Misc (10)</th>
                   <th className="p-3">Exam (50)</th>
-                  <th className="p-3">Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr className="border-b">
-                  <td className="p-3 font-bold text-gray-700">Alice Asuquo</td>
-                  <td className="p-3"><input type="number" className="border p-1 w-16 rounded text-center" defaultValue="18" max="20" /></td>
-                  <td className="p-3"><input type="number" className="border p-1 w-16 rounded text-center" defaultValue="15" max="20" /></td>
-                  <td className="p-3"><input type="number" className="border p-1 w-16 rounded text-center" defaultValue="8" max="10" /></td>
-                  <td className="p-3"><input type="number" className="border p-1 w-16 rounded text-center" defaultValue="45" max="50" /></td>
-                  <td className="p-3"><button className="bg-gray-200 text-gray-800 px-3 py-1 rounded text-sm font-bold hover:bg-gray-300">Add Remark</button></td>
-                </tr>
+              <tbody className="text-gray-800 dark:text-gray-200">
+                {classList.map((student) => (
+                  <tr key={student.id} className="border-b dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-[#1a1a1a]">
+                    <td className="p-3 font-bold">{student.name}</td>
+                    <td className="p-3"><input type="number" defaultValue={student.cat1} className="border dark:border-darkBorder bg-transparent p-1 w-16 rounded text-center" /></td>
+                    <td className="p-3"><input type="number" defaultValue={student.cat2} className="border dark:border-darkBorder bg-transparent p-1 w-16 rounded text-center" /></td>
+                    <td className="p-3"><input type="number" defaultValue={student.misc} className="border dark:border-darkBorder bg-transparent p-1 w-16 rounded text-center" /></td>
+                    <td className="p-3"><input type="number" defaultValue={student.exam} className="border dark:border-darkBorder bg-transparent p-1 w-16 rounded text-center" /></td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
-          <div className="mt-4 flex justify-end">
-             <button className="bg-emeraldGreen text-white px-6 py-2 rounded font-bold shadow hover:bg-green-700">Save All Scores</button>
-          </div>
+          <button className="mt-6 bg-emeraldGreen text-white px-6 py-2 rounded font-bold shadow hover:opacity-80">Save All Scores</button>
         </div>
       )}
 
-      {/* 2. CLASS TEACHER VIEW */}
-      {activeTab === 'class' && user.roles.isClassTeacher && (
-        <div className="bg-white p-6 rounded shadow border-t-4 border-emeraldYellow">
-          <h3 className="font-bold text-xl text-gray-800 mb-2">Class Manager: {user.assignments.className}</h3>
-          <p className="text-gray-600 mb-6">Review all results for your class and provide end-of-term remarks.</p>
-
+      {activeTab === 'class' && (
+        <div className="bg-white dark:bg-darkSurface p-6 rounded shadow-sm border dark:border-darkBorder border-t-4 border-t-emeraldYellow transition-colors">
+          <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-6">Class Remarks: {user.assignments.className}</h3>
           <div className="space-y-4">
-            <div className="border border-gray-200 rounded p-4 flex flex-col md:flex-row gap-4 items-center bg-gray-50">
-              <div className="flex-grow">
-                <p className="font-bold text-lg text-emeraldGreen">Alice Asuquo</p>
-                <p className="text-sm text-gray-500">Current Average: 84% | Status: Excellent</p>
+            {classList.map((student) => (
+              <div key={student.id} className="border dark:border-darkBorder rounded p-4 flex flex-col md:flex-row gap-4 items-center bg-gray-50 dark:bg-[#111]">
+                <div className="flex-grow">
+                  <p className="font-bold text-lg text-emeraldGreen dark:text-emeraldYellow">{student.name}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Current Average: {student.cat1 + student.cat2 + student.misc + student.exam}%</p>
+                </div>
+                <textarea placeholder="Type end of term remark..." className="border dark:border-darkBorder bg-transparent dark:text-white p-2 rounded w-full md:w-1/2 text-sm resize-none" rows="2"></textarea>
               </div>
-              <textarea placeholder="Type your end of term remark here..." className="border p-2 rounded w-full md:w-1/2 text-sm resize-none" rows="2"></textarea>
-              <button className="bg-emeraldYellow text-emeraldGreen px-4 py-2 rounded font-bold shadow hover:bg-yellow-400">Save Remark</button>
-            </div>
+            ))}
+            <button className="bg-emeraldYellow text-emeraldGreen px-6 py-2 rounded font-bold shadow hover:opacity-80">Publish Remarks</button>
           </div>
         </div>
       )}
 
-      {/* 3. HOD VIEW */}
-      {activeTab === 'hod' && user.roles.isHOD && (
-        <div className="bg-white p-6 rounded shadow border-t-4 border-gray-800">
-          <h3 className="font-bold text-xl text-gray-800 mb-2">HOD Overview: {user.assignments.department} Department</h3>
-          <p className="text-gray-600 mb-6">Review performance across all classes and approve results before publishing.</p>
-
+      {activeTab === 'hod' && (
+        <div className="bg-white dark:bg-darkSurface p-6 rounded shadow-sm border dark:border-darkBorder border-t-4 border-t-gray-800 transition-colors">
+          <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-6">HOD Overview: {user.assignments.department}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="border rounded p-4 shadow-sm">
-              <h4 className="font-bold text-emeraldGreen border-b pb-2 mb-2">Pending Approvals</h4>
-              <p className="text-sm text-gray-700 flex justify-between py-1">JSS 1 Mathematics Upload <span>by Mr. Bassey</span></p>
-              <button className="mt-3 bg-emeraldGreen text-white w-full py-2 rounded text-sm font-bold">Review & Approve</button>
+            <div className="border dark:border-darkBorder rounded p-4 shadow-sm bg-gray-50 dark:bg-[#111]">
+              <h4 className="font-bold text-emeraldGreen dark:text-emeraldYellow border-b dark:border-darkBorder pb-2 mb-4">Pending Approvals</h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 flex justify-between py-2 border-b dark:border-darkBorder">SS 1 Physics <span>by Mr. Bassey</span></p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 flex justify-between py-2 border-b dark:border-darkBorder">SS 3 Chemistry <span>by Ms. Ada</span></p>
+              <button className="mt-4 bg-emeraldGreen text-white w-full py-2 rounded font-bold hover:opacity-80">Approve All</button>
             </div>
-             <div className="border rounded p-4 shadow-sm bg-gray-50">
-              <h4 className="font-bold text-gray-800 border-b pb-2 mb-2">Department Average</h4>
-              <h1 className="text-4xl font-bold text-emeraldGreen mt-4 text-center">76%</h1>
-              <p className="text-center text-xs text-gray-500 mt-1">Across 4 Subjects</p>
+             <div className="border dark:border-darkBorder rounded p-4 shadow-sm flex flex-col items-center justify-center">
+              <h4 className="font-bold text-gray-800 dark:text-gray-200">Department Average</h4>
+              <h1 className="text-6xl font-display text-emeraldGreen dark:text-emeraldYellow mt-4">76%</h1>
+              <p className="text-xs text-gray-500 mt-2">Across 4 Subjects</p>
             </div>
           </div>
         </div>
