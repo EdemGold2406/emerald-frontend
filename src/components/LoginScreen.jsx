@@ -11,7 +11,7 @@ const LoginScreen = () => {
   ];
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center pb-24 md:pb-0">
       
       {/* HERO / GATEWAY SECTION */}
       <div className="flex flex-col justify-center max-w-6xl mx-auto w-full px-6 py-12 md:py-24">
@@ -34,15 +34,15 @@ const LoginScreen = () => {
               <div className="space-y-4">
                 <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">Select Gateway</p>
                 <button onClick={() => navigate('/admin')} className="w-full group relative flex items-center justify-between p-6 bg-white dark:bg-darkSurface border border-gray-200 dark:border-darkBorder hover:border-emeraldGreen dark:hover:border-emeraldGreen shadow-sm hover:shadow-md transition-all duration-300 rounded">
-                  <span className="font-display text-2xl text-gray-900 dark:text-white uppercase tracking-wide group-hover:text-emeraldGreen transition-colors">Admin Gateway</span>
+                  <span className="font-display text-xl md:text-2xl text-gray-900 dark:text-white uppercase tracking-wide group-hover:text-emeraldGreen transition-colors">Admin Gateway</span>
                   <span className="text-emeraldGreen opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300">→</span>
                 </button>
                 <button onClick={() => setShowTeacherLogins(true)} className="w-full group relative flex items-center justify-between p-6 bg-white dark:bg-darkSurface border border-gray-200 dark:border-darkBorder hover:border-emeraldYellow dark:hover:border-emeraldYellow shadow-sm hover:shadow-md transition-all duration-300 rounded">
-                  <span className="font-display text-2xl text-gray-900 dark:text-white uppercase tracking-wide group-hover:text-emeraldYellow transition-colors">Faculty / Staff</span>
+                  <span className="font-display text-xl md:text-2xl text-gray-900 dark:text-white uppercase tracking-wide group-hover:text-emeraldYellow transition-colors">Faculty / Staff</span>
                   <span className="text-emeraldYellow opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300">→</span>
                 </button>
                 <button onClick={() => navigate('/student')} className="w-full group relative flex items-center justify-between p-6 bg-white dark:bg-darkSurface border border-gray-200 dark:border-darkBorder hover:border-gray-900 dark:hover:border-white shadow-sm hover:shadow-md transition-all duration-300 rounded">
-                  <span className="font-display text-2xl text-gray-900 dark:text-white uppercase tracking-wide">Student / Parent</span>
+                  <span className="font-display text-xl md:text-2xl text-gray-900 dark:text-white uppercase tracking-wide">Student / Parent</span>
                   <span className="text-gray-900 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300">→</span>
                 </button>
               </div>
@@ -65,36 +65,38 @@ const LoginScreen = () => {
         </div>
       </div>
 
-      {/* AI COPILOT MARKETING BANNER */}
+      {/* AI COPILOT MARKETING BANNER (UPDATED COPY FOR PARENTS/STUDENTS) */}
       <div className="w-full bg-gradient-to-r from-emeraldGreen to-[#004d00] dark:from-[#0a0a0a] dark:to-[#111] border-y border-emeraldYellow/30 dark:border-darkBorder py-16">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="md:w-2/3">
-            <p className="text-emeraldYellow tracking-widest text-xs font-bold uppercase mb-3 flex items-center"><span className="text-lg mr-2">✨</span> Next-Gen Infrastructure</p>
+            <p className="text-emeraldYellow tracking-widest text-xs font-bold uppercase mb-3 flex items-center"><span className="text-lg mr-2">✨</span> 24/7 Digital Assistant</p>
             <h2 className="font-display text-3xl md:text-5xl text-white uppercase mb-4 tracking-wide">Meet Emerald Copilot.</h2>
             <p className="text-white/80 text-lg leading-relaxed mb-6">
-              Don't click through endless menus. Emerald is a role-aware AI Executive Assistant embedded directly into the portal. Just type natural language commands like <strong>"Print my Term 1 Broadsheet"</strong> or <strong>"Promote JSS1 to JSS2"</strong> and let the platform execute the data logic for you.
+              Don't click through endless menus trying to find your records. Emerald is a smart AI Assistant embedded directly into the portal. Just type natural language commands like <strong>"What is my Term 1 average?"</strong> or <strong>"Show me my pending assignments"</strong> and let the platform fetch your secure data instantly.
             </p>
-            <div className="flex gap-4 font-mono text-xs text-emeraldGreen bg-white/10 p-3 rounded border border-white/20 inline-block text-white">
-              <span className="text-emeraldYellow">✓</span> Semantic Routing &nbsp;&nbsp; <span className="text-emeraldYellow">✓</span> Role-Based Execution &nbsp;&nbsp; <span className="text-emeraldYellow">✓</span> Database Access
+            <div className="flex flex-wrap gap-4 font-mono text-[10px] md:text-xs text-white bg-white/10 p-3 rounded border border-white/20 inline-block">
+              <span><span className="text-emeraldYellow">✓</span> 24/7 Assistance</span>
+              <span><span className="text-emeraldYellow">✓</span> Role-Based Security</span>
+              <span><span className="text-emeraldYellow">✓</span> Instant Navigation</span>
             </div>
           </div>
           <div className="md:w-1/3 flex justify-center">
-             <div className="w-48 h-48 rounded-full border-4 border-emeraldYellow bg-black/50 shadow-[0_0_50px_rgba(255,215,0,0.3)] flex flex-col items-center justify-center animate-pulse">
-                <span className="text-5xl mb-2">🧠</span>
-                <span className="font-display text-emeraldYellow tracking-widest">ACTIVE</span>
+             <div className="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-emeraldYellow bg-black/50 shadow-[0_0_50px_rgba(255,215,0,0.3)] flex flex-col items-center justify-center animate-pulse">
+                <span className="text-4xl md:text-5xl mb-2">🧠</span>
+                <span className="font-display text-emeraldYellow tracking-widest text-sm md:text-base">ACTIVE</span>
              </div>
           </div>
         </div>
       </div>
 
       {/* ABOUT THE SCHOOL SECTION */}
-      <div className="w-full bg-white dark:bg-darkSurface border-b border-gray-200 dark:border-darkBorder py-20 transition-colors">
+      <div className="w-full bg-white dark:bg-darkSurface border-b border-gray-200 dark:border-darkBorder py-12 md:py-20 transition-colors">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
-            <h2 className="font-display text-4xl text-gray-900 dark:text-white uppercase mb-6">Our Vision</h2>
+            <h2 className="font-display text-3xl md:text-4xl text-gray-900 dark:text-white uppercase mb-6">Our Vision</h2>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-10">To be the foremost educational institution in the world, with a clear focus on excellence and moral upbringing of the child.</p>
             
-            <h2 className="font-display text-4xl text-gray-900 dark:text-white uppercase mb-6">Our Mission</h2>
+            <h2 className="font-display text-3xl md:text-4xl text-gray-900 dark:text-white uppercase mb-6">Our Mission</h2>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed">We aim to become flag bearers of excellent education with the right facilities that support learning in a holistic way for both children and parents.</p>
           </div>
           <div className="bg-gray-50 dark:bg-[#0a0a0a] border border-gray-200 dark:border-darkBorder p-8 rounded-lg shadow-sm">
@@ -108,10 +110,10 @@ const LoginScreen = () => {
       </div>
 
       {/* FEATURES / LEARNING OUTCOMES */}
-      <div className="w-full py-20 bg-gray-50 dark:bg-darkBase transition-colors">
+      <div className="w-full py-12 md:py-20 bg-gray-50 dark:bg-darkBase transition-colors">
         <div className="max-w-6xl mx-auto px-6">
           <p className="text-emeraldGreen dark:text-emeraldYellow tracking-widest text-sm font-bold uppercase mb-2 text-center">Learning Outcomes</p>
-          <h2 className="font-display text-4xl text-gray-900 dark:text-white uppercase mb-12 text-center">Check The Features</h2>
+          <h2 className="font-display text-3xl md:text-4xl text-gray-900 dark:text-white uppercase mb-12 text-center">Check The Features</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {['Critical thinking skills', 'Organization', 'Collaboration & problem solving', 'A keen sense of identity', 'Social & academic excellence', 'Giving back to the community'].map((feature, i) => (
