@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
-  const[showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
 
   // ==========================================
@@ -56,7 +56,10 @@ const AdminDashboard = () => {
     { id: 5, percent: "0 - 39", grade: "F9", desc: "FAIL", school: "1" }
   ];
 
-  const openModal = (title) => { setModalTitle(title); setShowModal(true); };
+  const openModal = (title) => { 
+    setModalTitle(title); 
+    setShowModal(true); 
+  };
 
   // ==========================================
   // UI COMPONENTS
@@ -132,14 +135,14 @@ const AdminDashboard = () => {
             
             {/* Cohort Locks (Matching Legacy UI) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <button className="border border-red-200 bg-red-50 text-red-600 dark:bg-red-900/20 dark:border-red-900 dark:text-red-400 py-2 text-sm font-bold rounded">Lock High School Students</button>
-              <button className="border border-red-200 bg-red-50 text-red-600 dark:bg-red-900/20 dark:border-red-900 dark:text-red-400 py-2 text-sm font-bold rounded">Lock Year School Students</button>
-              <button className="border border-red-200 bg-red-50 text-red-600 dark:bg-red-900/20 dark:border-red-900 dark:text-red-400 py-2 text-sm font-bold rounded">Lock Early Years Students</button>
+              <button className="border border-red-200 bg-red-50 text-red-600 dark:bg-red-900/20 dark:border-red-900 dark:text-red-400 py-2 text-sm font-bold rounded hover:opacity-80 transition-opacity">Lock High School Students</button>
+              <button className="border border-red-200 bg-red-50 text-red-600 dark:bg-red-900/20 dark:border-red-900 dark:text-red-400 py-2 text-sm font-bold rounded hover:opacity-80 transition-opacity">Lock Year School Students</button>
+              <button className="border border-red-200 bg-red-50 text-red-600 dark:bg-red-900/20 dark:border-red-900 dark:text-red-400 py-2 text-sm font-bold rounded hover:opacity-80 transition-opacity">Lock Early Years Students</button>
             </div>
 
             <div className="bg-white dark:bg-darkSurface shadow-sm border border-gray-200 dark:border-darkBorder rounded overflow-hidden">
               <div className="p-4 border-b border-gray-200 dark:border-darkBorder">
-                <input type="text" placeholder="search Student's name..." className="w-full md:w-1/3 border border-gray-300 dark:border-darkBorder bg-gray-50 dark:bg-[#0a0a0a] text-gray-900 dark:text-white p-2 rounded text-sm outline-none focus:border-emeraldGreen" />
+                <input type="text" placeholder="Search Student's name..." className="w-full md:w-1/3 border border-gray-300 dark:border-darkBorder bg-gray-50 dark:bg-[#0a0a0a] text-gray-900 dark:text-white p-2 rounded text-sm outline-none focus:border-emeraldGreen transition-colors" />
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse whitespace-nowrap">
@@ -184,10 +187,10 @@ const AdminDashboard = () => {
                       </td>
                       <td className="p-3">
                         <div className="grid grid-cols-2 gap-1 w-48">
-                          <button onClick={() => openModal('Assign Subjects')} className="bg-emeraldGreen text-white text-[10px] py-1 px-2 rounded hover:opacity-80">Assign Subjects</button>
-                          <button className="bg-blue-500 text-white text-[10px] py-1 px-2 rounded hover:opacity-80">Edit</button>
-                          <button onClick={() => openModal('Assign Class')} className="bg-teal-600 text-white text-[10px] py-1 px-2 rounded hover:opacity-80">Make Class Teacher</button>
-                          <button className="bg-red-500 text-white text-[10px] py-1 px-2 rounded hover:opacity-80">Delete</button>
+                          <button onClick={() => openModal('Assign Subjects')} className="bg-emeraldGreen text-white text-[10px] py-1 px-2 rounded hover:opacity-80 transition-opacity">Assign Subjects</button>
+                          <button className="bg-blue-500 text-white text-[10px] py-1 px-2 rounded hover:opacity-80 transition-opacity">Edit</button>
+                          <button onClick={() => openModal('Assign Class')} className="bg-teal-600 text-white text-[10px] py-1 px-2 rounded hover:opacity-80 transition-opacity">Make Class Teacher</button>
+                          <button className="bg-red-500 text-white text-[10px] py-1 px-2 rounded hover:opacity-80 transition-opacity">Delete</button>
                         </div>
                       </td>
                     </tr>
@@ -209,7 +212,7 @@ const AdminDashboard = () => {
                   {classesList.map(c => (
                     <tr key={c.id} className="border-b border-gray-100 dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-[#1a1a1a]">
                       <td className="p-4 font-bold">{c.class}</td><td className="p-4">{c.desc}</td><td className="p-4">{c.max}</td><td className="p-4">{c.level}</td>
-                      <td className="p-4"><button className="bg-emeraldYellow text-emeraldGreen px-3 py-1 rounded text-xs font-bold">Edit</button></td>
+                      <td className="p-4"><button className="bg-emeraldYellow text-emeraldGreen px-3 py-1 rounded text-xs font-bold hover:opacity-80 transition-opacity">Edit</button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -229,7 +232,7 @@ const AdminDashboard = () => {
                   {subjectsList.map((s, i) => (
                     <tr key={s.id} className="border-b border-gray-100 dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-[#1a1a1a]">
                       <td className="p-4">{i+1}</td><td className="p-4 font-bold">{s.name}</td><td className="p-4">{s.desc}</td><td className="p-4">{s.school}</td>
-                      <td className="p-4 flex gap-2"><button className="bg-emeraldYellow text-emeraldGreen px-3 py-1 rounded text-xs font-bold">Edit</button><button className="bg-red-500 text-white px-3 py-1 rounded text-xs font-bold">Delete</button></td>
+                      <td className="p-4 flex gap-2"><button className="bg-emeraldYellow text-emeraldGreen px-3 py-1 rounded text-xs font-bold hover:opacity-80 transition-opacity">Edit</button><button className="bg-red-500 text-white px-3 py-1 rounded text-xs font-bold hover:opacity-80 transition-opacity">Delete</button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -268,7 +271,11 @@ const AdminDashboard = () => {
                   {gradesList.map((g, i) => (
                     <tr key={i} className="border-b border-gray-100 dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-[#1a1a1a]">
                       <td className="p-4 font-mono">{g.percent}</td><td className="p-4 font-bold text-emeraldGreen dark:text-emeraldYellow">{g.grade}</td><td className="p-4">{g.desc}</td><td className="p-4">{g.school}</td>
-                      <td className="p-4 flex gap-2"><button className="text-blue-500 hover:underline text-sm font-bold">Edit</button> | <button className="text-red-500 hover:underline text-sm font-bold">Delete</button></td>
+                      <td className="p-4 flex gap-2">
+                        <button className="text-blue-500 hover:text-blue-400 hover:underline text-sm font-bold">Edit</button> 
+                        <span className="text-gray-300 dark:text-gray-600">|</span> 
+                        <button className="text-red-500 hover:text-red-400 hover:underline text-sm font-bold">Delete</button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -279,16 +286,16 @@ const AdminDashboard = () => {
 
       </div>
 
-      {/* GLOBAL MODAL FOR TEACHER ACTIONS */}
+      {/* GLOBAL MODAL FOR ACTIONS */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 animate-fade-in">
           <div className="bg-white dark:bg-darkSurface rounded p-6 max-w-sm w-full shadow-2xl border border-gray-200 dark:border-darkBorder relative transition-colors">
-            <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-500 hover:text-white font-bold">X</button>
+            <button onClick={() => setShowModal(false)} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:hover:text-white font-bold transition-colors">✕</button>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-darkBorder pb-2">{modalTitle}</h3>
             
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Please select the options below to complete the assignment for this staff member.</p>
             
-            <select className="w-full mb-4 p-2 border border-gray-300 dark:border-darkBorder rounded bg-gray-50 dark:bg-[#0a0a0a] text-gray-900 dark:text-white outline-none">
+            <select className="w-full mb-4 p-2 border border-gray-300 dark:border-darkBorder rounded bg-gray-50 dark:bg-[#0a0a0a] text-gray-900 dark:text-white outline-none focus:border-emeraldGreen transition-colors">
                <option>Select Option...</option>
                <option>J.S.S 1 WOLE SOYINKA A</option>
                <option>J.S.S 2 CHINUA ACHEBE A</option>
@@ -301,9 +308,6 @@ const AdminDashboard = () => {
 
     </div>
   );
-};
-
-export default AdminDashboard;
 };
 
 export default AdminDashboard;
