@@ -6,12 +6,15 @@ import LoginScreen from './components/LoginScreen';
 import AdminDashboard from './components/AdminDashboard';
 import TeacherDashboard from './components/TeacherDashboard';
 import StudentDashboard from './components/StudentDashboard';
-import EmeraldAgent from './components/EmeraldAgent'; // <--- NEW IMPORT
+import EmeraldAgent from './components/EmeraldAgent';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
+  
+  // New state to control the Agent from anywhere (like the Navbar)
+  const [isAgentOpen, setIsAgentOpen] = useState(false);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -33,7 +36,17 @@ const App = () => {
             <h1 className="text-xl md:text-2xl font-display uppercase tracking-widest text-emeraldGreen dark:text-white">Emerald Field</h1>
           </Link>
           
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-4 md:space-x-6">
+            
+            {/* Prominent Navbar Agent Button */}
+            <button 
+              onClick={() => setIsAgentOpen(true)}
+              className="hidden md:flex items-center space-x-2 bg-gradient-to-r from-emeraldGreen to-green-700 text-white px-5 py-2 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-sm uppercase tracking-wide border border-green-500"
+            >
+              <span>✨</span>
+              <span>Ask Emerald</span>
+            </button>
+
             <button 
               onClick={() => setIsDarkMode(!isDarkMode)} 
               className="text-2xl hover:scale-110 transition-transform bg-gray-100 dark:bg-darkBase p-2 rounded-full border dark:border-darkBorder"
@@ -54,8 +67,8 @@ const App = () => {
           </Routes>
         </main>
 
-        {/* EMERALD AGENT LIVES HERE - PERSISTENT ACROSS ALL PAGES */}
-        <EmeraldAgent />
+        {/* Passing the state down to the Agent */}
+        <EmeraldAgent isOpen={isAgentOpen} setIsOpen={setIsAgentOpen} />
         
       </div>
     </BrowserRouter>
