@@ -65,14 +65,14 @@ const LoginScreen = () => {
         </div>
       </div>
 
-      {/* AI COPILOT MARKETING BANNER (UPDATED COPY FOR PARENTS/STUDENTS) */}
+      {/* AI COPILOT MARKETING BANNER (UPDATED INSTRUCTIONS) */}
       <div className="w-full bg-gradient-to-r from-emeraldGreen to-[#004d00] dark:from-[#0a0a0a] dark:to-[#111] border-y border-emeraldYellow/30 dark:border-darkBorder py-16">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="md:w-2/3">
             <p className="text-emeraldYellow tracking-widest text-xs font-bold uppercase mb-3 flex items-center"><span className="text-lg mr-2">✨</span> 24/7 Digital Assistant</p>
             <h2 className="font-display text-3xl md:text-5xl text-white uppercase mb-4 tracking-wide">Meet Emerald Copilot.</h2>
             <p className="text-white/80 text-lg leading-relaxed mb-6">
-              Don't click through endless menus trying to find your records. Emerald is a smart AI Assistant embedded directly into the portal. Just type natural language commands like <strong>"What is my Term 1 average?"</strong> or <strong>"Show me my pending assignments"</strong> and let the platform fetch your secure data instantly.
+              Don't click through endless menus trying to find your records. Emerald is a smart AI Assistant embedded directly into the portal. <strong className="text-white">Click the ✨ Ask Emerald button at the top right, or the floating star icon to begin.</strong> Just type natural language commands like <strong>"What is my Term 1 average?"</strong> or <strong>"Show me my pending assignments"</strong> and let the platform fetch your secure data instantly.
             </p>
             <div className="flex flex-wrap gap-4 font-mono text-[10px] md:text-xs text-white bg-white/10 p-3 rounded border border-white/20 inline-block">
               <span><span className="text-emeraldYellow">✓</span> 24/7 Assistance</span>
