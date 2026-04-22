@@ -3,18 +3,18 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginScreen = () => {
   const navigate = useNavigate();
-  const [showTeacherLogins, setShowTeacherLogins] = useState(false);
+  const[showTeacherLogins, setShowTeacherLogins] = useState(false);
 
   const teacherAccounts =[
     { id: 1, name: "Mr. Bassey", email: "bassey@efa.sch.ng", password: "password123", roles: { isSubjectTeacher: true, isClassTeacher: false, isHOD: false }, assignments: { subjects:["JSS 1 Mathematics"] } },
-    { id: 2, name: "Mrs. Okon", email: "okon@efa.sch.ng", password: "password123", roles: { isSubjectTeacher: true, isClassTeacher: true, isHOD: false }, assignments: { subjects: ["JSS 1 English"], className: "JSS 1" } }
+    { id: 2, name: "Mrs. Okon", email: "okon@efa.sch.ng", password: "password123", roles: { isSubjectTeacher: true, isClassTeacher: true, isHOD: false }, assignments: { subjects:["JSS 1 English"], className: "JSS 1" } }
   ];
 
   return (
     <div className="w-full flex flex-col items-center">
       
       {/* HERO / GATEWAY SECTION */}
-      <div className="min-h-[85vh] flex flex-col justify-center max-w-6xl mx-auto w-full px-6 py-12">
+      <div className="flex flex-col justify-center max-w-6xl mx-auto w-full px-6 py-12 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-emeraldGreen dark:text-emeraldYellow tracking-widest text-sm font-bold uppercase mb-4 transition-colors">EmeraldField Schools</p>
@@ -65,8 +65,30 @@ const LoginScreen = () => {
         </div>
       </div>
 
+      {/* AI COPILOT MARKETING BANNER */}
+      <div className="w-full bg-gradient-to-r from-emeraldGreen to-[#004d00] dark:from-[#0a0a0a] dark:to-[#111] border-y border-emeraldYellow/30 dark:border-darkBorder py-16">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="md:w-2/3">
+            <p className="text-emeraldYellow tracking-widest text-xs font-bold uppercase mb-3 flex items-center"><span className="text-lg mr-2">✨</span> Next-Gen Infrastructure</p>
+            <h2 className="font-display text-3xl md:text-5xl text-white uppercase mb-4 tracking-wide">Meet Emerald Copilot.</h2>
+            <p className="text-white/80 text-lg leading-relaxed mb-6">
+              Don't click through endless menus. Emerald is a role-aware AI Executive Assistant embedded directly into the portal. Just type natural language commands like <strong>"Print my Term 1 Broadsheet"</strong> or <strong>"Promote JSS1 to JSS2"</strong> and let the platform execute the data logic for you.
+            </p>
+            <div className="flex gap-4 font-mono text-xs text-emeraldGreen bg-white/10 p-3 rounded border border-white/20 inline-block text-white">
+              <span className="text-emeraldYellow">✓</span> Semantic Routing &nbsp;&nbsp; <span className="text-emeraldYellow">✓</span> Role-Based Execution &nbsp;&nbsp; <span className="text-emeraldYellow">✓</span> Database Access
+            </div>
+          </div>
+          <div className="md:w-1/3 flex justify-center">
+             <div className="w-48 h-48 rounded-full border-4 border-emeraldYellow bg-black/50 shadow-[0_0_50px_rgba(255,215,0,0.3)] flex flex-col items-center justify-center animate-pulse">
+                <span className="text-5xl mb-2">🧠</span>
+                <span className="font-display text-emeraldYellow tracking-widest">ACTIVE</span>
+             </div>
+          </div>
+        </div>
+      </div>
+
       {/* ABOUT THE SCHOOL SECTION */}
-      <div className="w-full bg-white dark:bg-darkSurface border-y border-gray-200 dark:border-darkBorder py-20 transition-colors">
+      <div className="w-full bg-white dark:bg-darkSurface border-b border-gray-200 dark:border-darkBorder py-20 transition-colors">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <h2 className="font-display text-4xl text-gray-900 dark:text-white uppercase mb-6">Our Vision</h2>
@@ -93,7 +115,7 @@ const LoginScreen = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {['Critical thinking skills', 'Organization', 'Collaboration & problem solving', 'A keen sense of identity', 'Social & academic excellence', 'Giving back to the community'].map((feature, i) => (
-              <div key={i} className="bg-white dark:bg-darkSurface border border-gray-200 dark:border-darkBorder p-6 rounded shadow-sm text-center">
+              <div key={i} className="bg-white dark:bg-darkSurface border border-gray-200 dark:border-darkBorder p-6 rounded shadow-sm text-center hover:-translate-y-1 transition-transform">
                 <h4 className="font-bold text-gray-800 dark:text-gray-200">{feature}</h4>
               </div>
             ))}
@@ -118,7 +140,7 @@ const LoginScreen = () => {
                <input type="text" placeholder="Your Name" className="w-full p-2 rounded bg-white/10 dark:bg-darkSurface border border-white/20 outline-none text-sm placeholder-gray-300" />
                <input type="email" placeholder="Your Email" className="w-full p-2 rounded bg-white/10 dark:bg-darkSurface border border-white/20 outline-none text-sm placeholder-gray-300" />
                <textarea placeholder="Message" rows="3" className="w-full p-2 rounded bg-white/10 dark:bg-darkSurface border border-white/20 outline-none text-sm placeholder-gray-300 resize-none"></textarea>
-               <button type="button" className="bg-emeraldYellow text-emeraldGreen px-6 py-2 rounded font-bold uppercase text-sm w-full">Send Message</button>
+               <button type="button" className="bg-emeraldYellow text-emeraldGreen px-6 py-2 rounded font-bold uppercase text-sm w-full hover:bg-yellow-400 transition-colors">Send Message</button>
              </form>
           </div>
         </div>
