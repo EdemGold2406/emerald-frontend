@@ -15,10 +15,45 @@ const EmeraldAgent = ({ isOpen, setIsOpen }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping, isOpen]);
 
-  const handleSend = async (e) => {
+const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
 
+    const userMessage = { role: 'user', text: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput('');
+    setIsTyping(true);
+
+    try {
+      // Send the request to your Render Backend
+      const response = await fetch("https://your-emerald-backend.onrender.com/api/copilot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [{ role: "user", content: input }],
+          userRole: "Admin", // In Phase 3, we will pull this from your Supabase Auth
+          context: location.pathname
+        })
+      });
+
+      const data = await response.json();
+      
+      // If the AI returned a JSON command to navigate
+      try {
+        const command = JSON.parse(data.reply);
+        if (command.action === 'navigate') {
+          navigate(command.path);
+        }
+      } catch (e) {
+        // Not a JSON command, just a normal text reply
+      }
+
+      setMessages((prev) => [...prev, { role: 'assistant', text: data.reply }]);
+    } catch (error) {
+      setMessages((prev) => [...prev, { role: 'assistant', text: "I'm having trouble connecting to the backend. Please check your Render logs." }]);
+    }
+    setIsTyping(false);
+  };
     const userMessage = { role: 'user', text: input };
     setMessages((prev) =>[...prev, userMessage]);
     setInput('');
