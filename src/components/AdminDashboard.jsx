@@ -6,18 +6,18 @@ const AdminDashboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+useEffect(() => {
     const loadData = async () => {
       setLoading(true);
       try {
         let result = [];
         if (activeTab === 'students') result = await SchoolService.fetchStudents();
-        else if (activeTab === 'teachers') result = await SchoolService.fetchTeachers();
+        if (activeTab === 'teachers') result = await SchoolService.fetchTeachers();
         
-        console.log("Data received for", activeTab, ":", result); // Check console for this!
-        setData(Array.isArray(result) ? result : []);
+        console.log("Response from", activeTab, ":", result); 
+        setData(result);
       } catch (err) {
-        console.error("Fetch error:", err);
+        console.error("Fetch Error:", err);
       }
       setLoading(false);
     };
