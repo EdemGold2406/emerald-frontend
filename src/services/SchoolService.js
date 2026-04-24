@@ -1,72 +1,29 @@
-/**
- * SCHOOL SERVICE LAYER
- * Centralized service for API calls to the Emerald Field Backend.
- */
-
 const API_URL = "https://emerald-backend-c260.onrender.com";
 
 export const SchoolService = {
-
-  // ==========================================
-  // MODULE 1: STUDENTS MANAGEMENT
-  // ==========================================
+  // --- STUDENTS MODULE ---
   fetchStudents: async () => {
     const res = await fetch(`${API_URL}/api/students`);
     return await res.json();
   },
   
-  bulkUploadStudents: async (file, classId) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('class_id', classId);
-    return await fetch(`${API_URL}/api/students/bulk`, { method: "POST", body: formData }).then(r => r.json());
-  },
-
-  addIndividualStudent: async (student) => {
-    return await fetch(`${API_URL}/api/students/add-individual`, {
+  addStudent: async (studentData) => {
+    const res = await fetch(`${API_URL}/api/students/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(student)
-    }).then(r => r.json());
-  },
-
-  deleteStudent: async (id) => {
-    return await fetch(`${API_URL}/api/students/delete/${id}`, { method: "DELETE" });
-  },
-
-  toggleLock: async (level, locked) => {
-    return await fetch(`${API_URL}/api/students/lock`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level, locked })
+      body: JSON.stringify(studentData)
     });
-  },
-
-  // ==========================================
-  // MODULE 2: TEACHERS & STAFF MANAGEMENT
-  // ==========================================
-  fetchTeachers: async () => {
-    const res = await fetch(`${API_URL}/api/teachers`);
     return await res.json();
   },
 
-  assignSubject: async (teacherId, subjectId) => {
-    return await fetch(`${API_URL}/api/teachers/assign-subject`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ teacherId, subjectId })
-    });
+  deleteStudent: async (id) => {
+    const res = await fetch(`${API_URL}/api/students/${id}`, { method: "DELETE" });
+    return await res.json();
   },
-
-  makeClassTeacher: async (teacherId, classId) => {
-    return await fetch(`${API_URL}/api/teachers/make-class-teacher`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ teacherId, classId })
-    });
-  } // <--- ADDED CLOSING BRACE HERE
-
-  // ==========================================
-  // MODULE 3: CLASSES & MODULE 4: SUBJECTS
-  // ==========================================
+  
+  // --- TEACHERS MODULE ---
+  fetchTeachers: async () => {
+    const res = await fetch(`${API_URL}/api/teachers`);
+    return await res.json();
+  }
 };
