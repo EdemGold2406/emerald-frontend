@@ -1,41 +1,68 @@
+/**
+ * SCHOOL SERVICE LAYER
+ * Centralized service for API calls to the Emerald Field Backend.
+ */
+
 const API_URL = "https://emerald-backend-c260.onrender.com";
-import { jsPDF } from "jspdf";
 
 export const SchoolService = {
-  downloadCredentials: (student) => {
-    const doc = new jsPDF();
-    doc.text("Emerald Field School - Student Credentials", 20, 20);
-    doc.text(`Name: ${student.first_name} ${student.surname}`, 20, 40);
-    doc.text(`Username (Email): ${student.email}`, 20, 50);
-    doc.text(`Password: ${student.password}`, 20, 60);
-    doc.save(`${student.first_name}_credentials.pdf`);
-  }
-};
-
-export const SchoolService = {
-  // --- STUDENTS MODULE ---
+  // ==========================================
+  // MODULE 1: STUDENTS MANAGEMENT
+  // ==========================================
   fetchStudents: async () => {
     const res = await fetch(`${API_URL}/api/students`);
     return await res.json();
   },
   
-  addStudent: async (studentData) => {
-    const res = await fetch(`${API_URL}/api/students/add`, {
+  bulkUploadStudents: async (file, classId) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('class_id', classId);
+    return await fetch(`${API_URL}/api/students/bulk`, { method: "POST", body: formData }).then(r => r.json());
+  },
+
+  addIndividualStudent: async (student) => {
+    const res = await fetch(`${API_URL}/api/students/add-individual`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(studentData)
+      body: JSON.stringify(student)
     });
     return await res.json();
   },
 
   deleteStudent: async (id) => {
-    const res = await fetch(`${API_URL}/api/students/${id}`, { method: "DELETE" });
-    return await res.json();
+    return await fetch(`${API_URL}/api/students/${id}`, { method: "DELETE" });
   },
-  
-  // --- TEACHERS MODULE ---
+
+  toggleLock: async (level, locked) => {
+    return await fetch(`${API_URL}/api/students/lock`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ level, locked })
+    });
+  },
+
+  // ==========================================
+  // MODULE 2: TEACHERS & STAFF MANAGEMENT
+  // ==========================================
   fetchTeachers: async () => {
     const res = await fetch(`${API_URL}/api/teachers`);
     return await res.json();
+  },
+
+  assignSubject: async (teacherId, subjectId) => {
+    return await fetch(`${API_URL}/api/teachers/assign-subject`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ teacherId, subjectId })
+    });
+  },
+
+  makeClassTeacher: async (teacherId, classId) => {
+    return await fetch(`${API_URL}/api/teachers/make-class-teacher`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ teacherId, classId })
+    });
   }
 };
