@@ -56,13 +56,58 @@ const AdminDashboard = () => {
               <tbody className="dark:text-gray-300">
                 {data.map(item => (
                   <tr key={item.id} className="border-b dark:border-darkBorder hover:bg-gray-50 dark:hover:bg-[#1a1a1a]">
+                   
+                    /*students tab*\
+                    
                     {activeTab === 'students' && (
-                      <>
-                        <td className="p-4 font-mono">{item.reg_no || 'N/A'}</td>
-                        <td className="p-4 font-bold">{item.first_name} {item.surname}</td>
-                        <td className="p-4 text-emeraldGreen">{item.email}</td>
-                      </>
-                    )}
+  <div className="animate-fade-in">
+    <h1 className="text-xl font-bold mb-6 dark:text-white uppercase tracking-wider">STUDENT PROVISIONING</h1>
+    
+    {/* Provisioning Modes */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      {/* Bulk Upload */}
+      <div className="bg-white dark:bg-darkSurface p-6 border dark:border-darkBorder rounded shadow-sm">
+        <h3 className="font-bold mb-4 dark:text-emeraldYellow">Bulk Upload (Excel)</h3>
+        <input type="file" onChange={(e) => setFile(e.target.files[0])} className="mb-4 text-xs dark:text-white" />
+        <button onClick={handleBulkUpload} className="bg-emeraldGreen text-white px-4 py-2 rounded text-xs font-bold hover:opacity-80">UPLOAD BATCH</button>
+      </div>
+
+      {/* Individual Add */}
+      <div className="bg-white dark:bg-darkSurface p-6 border dark:border-darkBorder rounded shadow-sm">
+        <h3 className="font-bold mb-4 dark:text-emeraldYellow">Individual Add</h3>
+        <div className="flex flex-col gap-2">
+            <input placeholder="First Name" className="border dark:border-darkBorder bg-transparent p-2 text-sm rounded dark:text-white" />
+            <input placeholder="Surname" className="border dark:border-darkBorder bg-transparent p-2 text-sm rounded dark:text-white" />
+            <button className="bg-blue-600 text-white py-2 rounded text-xs font-bold">ADD STUDENT</button>
+        </div>
+      </div>
+    </div>
+
+    {/* Search & Data Table */}
+    <div className="bg-white dark:bg-darkSurface border dark:border-darkBorder rounded overflow-hidden">
+      <div className="p-4 border-b dark:border-darkBorder">
+        <input placeholder="Search records..." className="w-full bg-gray-50 dark:bg-darkBase border dark:border-darkBorder p-2 text-sm rounded dark:text-white" />
+      </div>
+      <table className="w-full text-left text-xs uppercase">
+        <thead className="bg-gray-100 dark:bg-[#111] text-gray-500">
+            <tr><th className="p-4">Reg.No</th><th className="p-4">Name</th><th className="p-4">Actions</th></tr>
+        </thead>
+        <tbody className="dark:text-gray-300">
+          {data.map(s => (
+            <tr key={s.id} className="border-b dark:border-darkBorder">
+              <td className="p-4">{s.reg_no}</td>
+              <td className="p-4 font-bold">{s.first_name} {s.surname}</td>
+              <td className="p-4 flex gap-2">
+                <button className="text-blue-500 font-bold underline">Edit</button>
+                <button className="text-red-500 font-bold underline">Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
                     {activeTab === 'teachers' && (
                       <>
                         <td className="p-4 font-bold">{item.first_name} {item.surname}</td>
