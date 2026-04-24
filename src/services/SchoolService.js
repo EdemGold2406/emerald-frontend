@@ -1,7 +1,16 @@
+/**
+ * SCHOOL SERVICE LAYER
+ * Centralized service for API calls to the Emerald Field Backend.
+ * Each module below is clearly labeled so you know exactly where to append new features.
+ */
+
 const API_URL = "https://emerald-backend-c260.onrender.com";
 
 export const SchoolService = {
-  // --- STUDENTS ---
+
+  // ==========================================
+  // MODULE 1: STUDENTS MANAGEMENT
+  // ==========================================
   fetchStudents: async () => {
     const res = await fetch(`${API_URL}/api/students`);
     return await res.json();
@@ -23,25 +32,27 @@ export const SchoolService = {
   },
 
   deleteStudent: async (id) => {
-    await fetch(`${API_URL}/api/students/delete/${id}`, { method: "DELETE" });
+    return await fetch(`${API_URL}/api/students/delete/${id}`, { method: "DELETE" });
   },
 
   toggleLock: async (level, locked) => {
-    await fetch(`${API_URL}/api/students/lock`, {
+    return await fetch(`${API_URL}/api/students/lock`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ level, locked })
     });
   },
 
-  // --- TEACHERS ---
+  // ==========================================
+  // MODULE 2: TEACHERS & STAFF MANAGEMENT
+  // ==========================================
   fetchTeachers: async () => {
     const res = await fetch(`${API_URL}/api/teachers`);
     return await res.json();
   },
 
   assignSubject: async (teacherId, subjectId) => {
-    await fetch(`${API_URL}/api/teachers/assign-subject`, {
+    return await fetch(`${API_URL}/api/teachers/assign-subject`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ teacherId, subjectId })
@@ -49,10 +60,18 @@ export const SchoolService = {
   },
 
   makeClassTeacher: async (teacherId, classId) => {
-    await fetch(`${API_URL}/api/teachers/make-class-teacher`, {
+    return await fetch(`${API_URL}/api/teachers/make-class-teacher`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ teacherId, classId })
     });
   }
+
+  // ==========================================
+  // MODULE 3: CLASSES (Ready to add below)
+  // ==========================================
+
+  // ==========================================
+  // MODULE 4: SUBJECTS (Ready to add below)
+  // ==========================================
 };
