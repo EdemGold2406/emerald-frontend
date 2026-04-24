@@ -32,5 +32,21 @@ export const SchoolService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ teacherId, classId })
     });
+    export const SchoolService = {
+  // ... previous methods
+  bulkUploadStudents: async (file, classId) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('class_id', classId);
+    return await fetch(`${API_URL}/api/students/bulk`, { method: "POST", body: formData }).then(r => r.json());
+  },
+  addIndividualStudent: async (student) => {
+    return await fetch(`${API_URL}/api/students/add-individual`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(student)
+    }).then(r => r.json());
+  }
+};
   }
 };
