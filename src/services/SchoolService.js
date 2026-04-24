@@ -1,7 +1,6 @@
 /**
  * SCHOOL SERVICE LAYER
  * Centralized service for API calls to the Emerald Field Backend.
- * Each module below is clearly labeled so you know exactly where to append new features.
  */
 
 const API_URL = "https://emerald-backend-c260.onrender.com";
@@ -65,13 +64,9 @@ export const SchoolService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ teacherId, classId })
     });
-  }
+  } // <--- ADDED CLOSING BRACE HERE
 
   // ==========================================
-  // MODULE 3: CLASSES (Ready to add below)
-  // ==========================================
-
-  // ==========================================
-  // MODULE 4: SUBJECTS (Ready to add below)
+  // MODULE 3: CLASSES & MODULE 4: SUBJECTS
   // ==========================================
 };
