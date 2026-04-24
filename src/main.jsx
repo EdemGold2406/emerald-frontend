@@ -6,7 +6,7 @@ import LoginScreen from './components/LoginScreen';
 import AdminLayout from './components/Admin/AdminLayout';
 import TeacherDashboard from './components/TeacherDashboard';
 import StudentDashboard from './components/StudentDashboard';
-import EmeraldAgent from './components/Shared/EmeraldAgent';
+import EmeraldAgent from './components/shared/EmeraldAgent';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') === 'dark');
