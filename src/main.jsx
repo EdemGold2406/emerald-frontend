@@ -13,13 +13,8 @@ const App = () => {
   const [isAgentOpen, setIsAgentOpen] = useState(false);
 
   useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    document.documentElement.className = isDarkMode ? 'dark' : '';
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
   return (
@@ -33,14 +28,14 @@ const App = () => {
           </Link>
           
           <div className="flex items-center space-x-4">
-            <button onClick={() => setIsAgentOpen(true)} className="bg-emeraldGreen text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide hover:opacity-80">
+            <button onClick={() => setIsAgentOpen(true)} className="bg-emeraldGreen text-white px-4 py-2 rounded-full text-xs font-bold uppercase hover:opacity-80">
               ✨ Ask Emerald
             </button>
             <button onClick={() => setIsDarkMode(!isDarkMode)} className="text-xl">{isDarkMode ? '☀️' : '🌙'}</button>
           </div>
         </nav>
 
-        <main className="p-4 md:p-8">
+        <main>
           <Routes>
             <Route path="/" element={<LoginScreen />} />
             <Route path="/admin" element={<AdminDashboard />} />
