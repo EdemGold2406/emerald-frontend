@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import LoginScreen from './components/LoginScreen';
-import AdminLayout from './components/Admin/AdminLayout'; // Updated path
-import EmeraldAgent from './components/Shared/EmeraldAgent'; // Updated path
+import AdminLayout from './components/Admin/AdminLayout';
+import TeacherDashboard from './components/TeacherDashboard';
+import StudentDashboard from './components/StudentDashboard';
+import EmeraldAgent from './components/Shared/EmeraldAgent';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') === 'dark');
@@ -19,8 +21,7 @@ const App = () => {
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50 dark:bg-darkBase text-gray-900 dark:text-gray-100 transition-colors">
         
-        {/* Navigation Bar */}
-        <nav className="bg-white dark:bg-darkSurface border-b dark:border-darkBorder p-4 flex justify-between items-center sticky top-0 z-40">
+        <nav className="bg-white dark:bg-darkSurface border-b border-gray-200 dark:border-darkBorder p-4 flex justify-between items-center sticky top-0 z-40">
           <Link to="/" className="flex items-center space-x-3">
             <div className="w-10 h-10 border-2 border-emeraldGreen rounded-full flex items-center justify-center font-bold text-emeraldGreen">EF</div>
             <h1 className="text-xl font-display uppercase tracking-widest text-emeraldGreen dark:text-white">Emerald Field</h1>
@@ -38,10 +39,11 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LoginScreen />} />
             <Route path="/admin" element={<AdminLayout />} />
+            <Route path="/teacher" element={<TeacherDashboard />} />
+            <Route path="/student" element={<StudentDashboard />} />
           </Routes>
         </main>
 
-        {/* Global Agent - Visible on every page */}
         <EmeraldAgent isOpen={isAgentOpen} setIsOpen={setIsAgentOpen} />
       </div>
     </BrowserRouter>
