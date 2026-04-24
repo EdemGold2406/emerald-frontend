@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import LoginScreen from './components/LoginScreen';
 import AdminLayout from './components/Admin/AdminLayout';
 import TeacherDashboard from './components/TeacherDashboard';
-import StudentDashboard from './components/StudentDashboard';
+import EmeraldAgent from './components/EmeraldAgent';
 import EmeraldAgent from './components/Shared/EmeraldAgent';
 
 const App = () => {
